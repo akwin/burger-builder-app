@@ -11,7 +11,7 @@ const burger = (props) => {
     //this method allows us to extract the keys of given object (ingredients) into an array of the keys, ['salad', 'bacon', 'cheese', 'meat'].
     // the values of the keys are not part of the array
     .map(igKey => { 
-    // chaining this method to the new formed array (created by the Object.keys() call)
+    // chaining this method to the new formed arra y (created by the Object.keys() call)
     // map executes a function on each element in the calling array
     // we use the name igKey for the argument we receive in the function because that's what the array is made of: 'salad', 'cheese', etc. 
         return [...Array(props.ingredients[igKey])].map((_, i) => {
@@ -19,6 +19,7 @@ const burger = (props) => {
         }); 
     })
     .reduce((arr, el) => {
+        //flatten the array
         return arr.concat(el)
     }, []);
     if (transformedIngredients.length === 0) {

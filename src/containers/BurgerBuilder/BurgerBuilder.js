@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = { //constants that you use as global constants are capitalized
     salad: 0.5,
@@ -25,12 +27,14 @@ class BurgerBuilder extends Component {
     updatePurchaseState (ingredients) {
         const sum = Object.keys(ingredients)
             .map(igKey => {
-                return ingredients[igKey];
+                return ingredients[igKey]; 
+                //replace old values ['salad', 'cheese',] with new values which are the amounts of ingredients
             })
-            .reduce((sum, el) => {
+            .reduce((sum, el) => { 
+                //reduce the array to turn it into a single number which the sum of all amounts
                 return sum + el;
-            }, 0);
-            this.setState({purchaseable: sum > 0 });
+            }, 0); //sum is either 0 (when no ingredients are added) or the sum of ingredients added
+            this.setState({purchaseable: sum > 0 }); //sum > 0 is either true or false which changes the state
     }
     
     addIngredientHandler = (type) => {
@@ -75,6 +79,9 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients}/>
+                </Modal>
                 <Burger ingredients= {this.state.ingredients} />
                 <BuildControls 
                     ingredientAdded = {this.addIngredientHandler}
