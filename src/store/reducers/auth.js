@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import {updateObject} from '../utility';
+import {updateObject} from '../../shared/utility';
 
 const initialState = {
     token: null, //if token is null, user is authenticated
@@ -14,7 +14,6 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
-    console.log('here')
     return updateObject(state, {
         token: action.idToken,
         userId: action.userId,

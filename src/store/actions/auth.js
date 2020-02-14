@@ -54,7 +54,6 @@ export const auth = (email, password, isSignUp) => {
         }
         axios.post(url, authData)
              .then(response => {
-                 console.log(response);
                  const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000); 
                  //new date  without args gives us the current date. new date with args gives us a date with the date we pass as an arg
                  localStorage.setItem('token', response.data.idToken); //setItem allows us to store information in the localStorage
